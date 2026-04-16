@@ -20,14 +20,10 @@ public class Main {
         int capacidadB_clasificacion = Integer.parseInt(properties.getProperty("capacidadB_clasificacion"));
         int capacidadB_consolidacion = Integer.parseInt(properties.getProperty("capacidadB_consolidacion"));
 
-
-
-
-
-
-
-    
-
-        
+        for (int i = 1; i <= numB_Sensores; i++) {
+            int idSensor = i;
+            int cantidadEventos = numBase_eventos * idSensor;
+            
+        }
     }
-}
+}    
