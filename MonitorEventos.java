@@ -9,22 +9,22 @@ public class MonitorEventos {
         this.capacidad = capacidad;
     }
 
-    // Equivale a "put" o depositar un evento
+
     public synchronized void generarEvento(Evento e) throws InterruptedException {
         while (cola.size() == capacidad) {
-            wait(); // Espera pasiva si el buzón está lleno
+            wait();
         }
         cola.add(e);
-        notifyAll(); // Despierta a los hilos que estén en wait()
+        notifyAll(); 
     }
 
-    // Equivale a "get" o retirar un evento
+
     public synchronized Evento revisarEvento() throws InterruptedException {
         while (cola.isEmpty()) {
-            wait(); // Espera pasiva si el buzón está vacío
+            wait(); 
         }
         Evento e = cola.poll();
-        notifyAll(); // Despierta a los hilos que estén en wait()
+        notifyAll(); 
         return e;
     }
 }
