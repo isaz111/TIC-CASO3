@@ -1,4 +1,3 @@
-import java.util.ResourceBundle.Control;
 
 public class Clasificador extends Thread {
     private MonitorEventos clasificacion;
