@@ -34,6 +34,11 @@ public class Broker extends Thread {
             }else{
                 monitor.generarEvento(evento);
             }
+            if (i == totalEventos()){
+                Evento finEvento = new Evento( "fin",0 , true);
+                monitor.generarEvento(finEvento);
+            }
+    
         }
 
         } catch(InterruptedException e){
