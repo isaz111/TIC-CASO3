@@ -40,7 +40,11 @@ public class Broker extends Thread {
             e.printStackTrace();
         }
     }
-    
 
+    @Override
+    public void run() {
+        tieneAnomalia();
+    }
+    
     
 }
