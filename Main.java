@@ -20,6 +20,60 @@ public class Main {
         int capacidadB_clasificacion = Integer.parseInt(properties.getProperty("capacidadB_clasificacion"));
         int capacidadB_consolidacion = Integer.parseInt(properties.getProperty("capacidadB_consolidacion"));
 
+        BuzonSemiactivo buzonEntrada = new BuzonSemiactivo();
+        BuzonSemiactivo buzonAlerta = new BuzonSemiactivo();
+
+        MonitorEventos monitorClasificacion = new MonitorEventos(capacidadB_clasificacion);
+        MonitorEventos[] monitorConsolidacion = new MonitorEventos[numServidores];
+        for(int i = 0; i < numServidores;i++){
+            monitorConsolidacion[i] = new MonitorEventos(capacidadB_consolidacion);
+        }
+
+        ControlClasificadores control = new ControlClasificadores(numClasificadores, numServidores, monitorConsolidacion);
+
+        Servidores[] servidores = new Servidores[numServidores];
+        for (int i = 0; i < numServidores; i++){
+            servidores[i] = new Servidores(monitorConsolidacion[i]);
+        }
+
+        Clasificador[] clasificadores = new Clasificador[numClasificadores];
+        for (int i = 0; i < numClasificadores; i++) {
+            clasificadores[i] = new Clasificador(monitorClasificacion, monitorConsolidacion, control);
+        }
+
+        Administador administrador = new Administador(numClasificadores, buzonAlerta, monitorClasificacion);
+
+        Broker broker = new Broker(buzonEntrada, buzonAlerta, monitorClasificacion, numB_Sensores, numBase_eventos);
+
+        Thread[] sensores = new Thread[numB_Sensores];
+        for (int i = 0; i < numB_Sensores; i++) {
+            Sensores sensor = new Sensores(numBase_eventos, i + 1, numServidores, buzonEntrada);
+            sensores[i] = new Thread(sensor);
+        }
+
+        for (int i = 0; i < numServidores; i++) {
+            servidores[i].start();
+        }
+
+        for (int i = 0; i < numClasificadores; i++) {
+            clasificadores[i].start();
+        }
+
+        administrador.start();
+        broker.start();
+
+        for (int i = 0; i < numB_Sensores; i++) {
+            sensores[i].start();
+        }
+
+
+
+
+
+
+
+
+
         
 
     }
