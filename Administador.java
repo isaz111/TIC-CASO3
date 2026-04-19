@@ -1,14 +1,14 @@
 import java.util.Random;
 
 public class Administador extends Thread {
-    private int nc;
-    private BuzonSemiactivo alertas;
+    private int numClasificadores;
+    private BuzonSemiactivo buzonAlertas;
     private MonitorEventos Clasificacion;
     private Random random = new Random();
     
-    public Administador(int nc, BuzonSemiactivo alertas, MonitorEventos Clasificacion) {
-        this.nc = nc;
-        this.alertas = alertas;
+    public Administador(int numClasificadores, BuzonSemiactivo buzonAlertas, MonitorEventos Clasificacion) {
+        this.numClasificadores = numClasificadores;
+        this.buzonAlertas = buzonAlertas;
         this.Clasificacion = Clasificacion;
     }
 
@@ -16,15 +16,16 @@ public class Administador extends Thread {
     public void run() {
         try{
             while(true){
-                Evento e = alertas.get();
+                Evento e = buzonAlertas.get();
                 if (e.isEsFin()) {
-                    for (int i = 0; i < nc; i++) {
+                    for (int i = 0; i < numClasificadores; i++) {
                         Evento finEvento = new Evento("Fin", 0, true);
                         Clasificacion.generarEvento(finEvento);
-                        break;
                     }
+                    return;
                 }
-                if (random.nextInt(21)%4==0){
+                int numRandom = random.nextInt(21);
+                if (numRandom % 4 == 0){
                         Clasificacion.generarEvento(e);
                     }
                 }

@@ -1,14 +1,16 @@
 import java.util.Random;
 public class Broker extends Thread {
-    private BuzonSemiactivo buzon;
+    private BuzonSemiactivo buzonEntrada;
+    private BuzonSemiactivo buzonAlertas;
     private MonitorEventos monitor;
     private int numSensores;
     private int numBase_eventos;
 
 
-    public Broker(Evento evento, BuzonSemiactivo buzon, MonitorEventos monitor, 
+    public Broker(BuzonSemiactivo buzonEntrada, BuzonSemiactivo buzonAlertas, MonitorEventos monitor, 
         int numSensores, int numBase_eventos){
-        this.buzon = buzon;
+        this.buzonEntrada = buzonEntrada;
+        this.buzonAlertas = buzonAlertas;
         this.monitor = monitor;
         this.numSensores= numSensores;
         this.numBase_eventos = numBase_eventos ;
@@ -25,21 +27,20 @@ public class Broker extends Thread {
     public void tieneAnomalia(){
         Random random = new Random();
         try{
-            for (int i = 0; i < totalEventos(); i++){
-            Evento evento = monitor.revisarEvento();
-            int numero = random.nextInt(201);
+            int total = totalEventos();
+            for (int i = 0; i < total; i++){
+                Evento evento = buzonEntrada.get();
+                int numero = random.nextInt(201);
 
-            if( numero % 8 == 0){
-                buzon.put(evento);
-            }else{
-                monitor.generarEvento(evento);
+                if( numero % 8 == 0){
+                    buzonAlertas.put(evento);
+                }else{
+                    monitor.generarEvento(evento);
+                }
             }
-            if (i == totalEventos()){
-                Evento finEvento = new Evento( "fin",0 , true);
-                monitor.generarEvento(finEvento);
-            }
-    
-        }
+
+        Evento finEvento = new Evento( "fin",0 , true);
+        buzonAlertas.put(finEvento);
 
         } catch(InterruptedException e){
             e.printStackTrace();
