@@ -63,7 +63,11 @@ public class Main {
         broker.start();
 
         for (int i = 0; i < numB_Sensores; i++) {
-            sensores[i].start();
+            sensores[i].start(); 
+        }
+
+        for (int i=0; i < numServidores;i++){
+            servidores[i].join();
         }
 
 

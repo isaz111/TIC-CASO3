@@ -39,7 +39,7 @@ public class Broker extends Thread {
                 }
             }
 
-        Evento finEvento = new Evento( "fin",0 , true);
+        Evento finEvento = new Evento( "Fin",0 , true);
         buzonAlertas.put(finEvento);
 
         } catch(InterruptedException e){
