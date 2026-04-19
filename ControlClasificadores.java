@@ -11,6 +11,7 @@ public class ControlClasificadores {
 
     public synchronized void registrarFin() throws InterruptedException {
         terminados++;
+        
         if (terminados == numClasificadores) {
             for (int i = 0; i < numServidores; i++) {
                 Evento finEvento = new Evento("Fin", 0, true);

@@ -17,7 +17,7 @@ public class Clasificador extends Thread {
                 Evento e = clasificacion.revisarEvento();
                 if (e.isEsFin()) {
                     control.registrarFin();
-                    break;
+                    return;
                 }
                 consolidacion[e.getServidorDestino() - 1].generarEvento(e);
             }
