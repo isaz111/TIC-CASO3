@@ -33,12 +33,12 @@ public class Main {
 
         Servidores[] servidores = new Servidores[numServidores];
         for (int i = 0; i < numServidores; i++){
-            servidores[i] = new Servidores(monitorConsolidacion[i]);
+            servidores[i] = new Servidores(monitorConsolidacion[i],i+1);
         }
 
         Clasificador[] clasificadores = new Clasificador[numClasificadores];
         for (int i = 0; i < numClasificadores; i++) {
-            clasificadores[i] = new Clasificador(monitorClasificacion, monitorConsolidacion, control);
+            clasificadores[i] = new Clasificador(monitorClasificacion, monitorConsolidacion, control, i+1);
         }
 
         Administador administrador = new Administador(numClasificadores, buzonAlerta, monitorClasificacion);
