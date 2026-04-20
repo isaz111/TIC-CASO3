@@ -32,9 +32,13 @@ public class Broker extends Thread {
                 Evento evento = buzonEntrada.get();
                 int numero = random.nextInt(201);
 
+                System.out.println("Broker recibe evento " + evento.getId());
+
                 if( numero % 8 == 0){
+                     System.out.println("Evento " + evento.getId() + " es ANOMALO -> alertas");
                     buzonAlertas.put(evento);
                 }else{
+                    System.out.println("Evento " + evento.getId() + " es NORMAL -> clasificación");
                     monitor.generarEvento(evento);
                 }
             }

@@ -22,9 +22,11 @@ public class Sensores implements Runnable {
         for (int i = 1; i <= cantidadEventos; i++) {
             String idEvento = "S"+ idSensor + "-" + i;
             int destino = random.nextInt(ns) + 1;
+            System.out.println("Sensor " + idSensor + " generó evento " + idEvento + " -> servidor " + destino);
             Evento evento = new Evento(idEvento, destino, false);
             buzonEntrada.put(evento);
         }
+        
     }
         
 

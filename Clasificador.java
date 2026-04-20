@@ -20,6 +20,7 @@ public class Clasificador extends Thread {
                     return;
                 }
                 consolidacion[e.getServidorDestino() - 1].generarEvento(e);
+                System.out.println("Clasificador envía evento " + e.getId() + " al servidor " + e.getServidorDestino());
             }
         } catch (InterruptedException ex) {
             ex.printStackTrace();

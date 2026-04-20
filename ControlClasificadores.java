@@ -17,6 +17,7 @@ public class ControlClasificadores {
                 Evento finEvento = new Evento("Fin", 0, true);
                 consolidacion[i].generarEvento(finEvento);
             }
+            System.out.println("Clasificador terminó. Total: " + terminados);
         }
     }
 

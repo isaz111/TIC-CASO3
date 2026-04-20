@@ -51,24 +51,43 @@ public class Main {
             sensores[i] = new Thread(sensor);
         }
 
+        //inicia servidores
         for (int i = 0; i < numServidores; i++) {
             servidores[i].start();
         }
-
+        //inicia clasificadores
         for (int i = 0; i < numClasificadores; i++) {
             clasificadores[i].start();
         }
-
+        //admin y broker
         administrador.start();
         broker.start();
-
+        
+        //inicia sensores
         for (int i = 0; i < numB_Sensores; i++) {
             sensores[i].start(); 
         }
 
+        //finaliza sensores
+        for (Thread sensor : sensores) {
+            sensor.join();
+        }
+
+        //finaliza broker y admin
+        broker.join();
+        administrador.join();
+
+        //finaliza clasificadores
+        for (Clasificador c : clasificadores) {
+            c.join();
+        }
+
+        //finaliza servidores
         for (int i=0; i < numServidores;i++){
             servidores[i].join();
         }
+
+        System.out.println("✅ Sistema finalizó correctamente");
 
 
 
