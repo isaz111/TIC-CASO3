@@ -17,11 +17,12 @@ public class Servidores extends Thread {
                 Evento evento = buzonConsolidacion.revisarEvento();
 
                 if (evento.isEsFin()) {
+                     System.out.println("Servidor recibió FIN y termina");
                     return;
                 }
                 System.out.println("Servidor procesa evento " + evento.getId());
                 Thread.sleep(random.nextInt(901) + 100);
-                System.out.println("Servidor termina");
+                System.out.println("Servidor termina de procesar evento" + evento.getId());
 
             }
 

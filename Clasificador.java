@@ -16,6 +16,7 @@ public class Clasificador extends Thread {
             while (true) {
                 Evento e = clasificacion.revisarEvento();
                 if (e.isEsFin()) {
+                    System.out.println("Clasificador recibió FIN");
                     control.registrarFin();
                     return;
                 }

@@ -22,19 +22,21 @@ public class Administador extends Thread {
 
                 if (e.isEsFin()) {
                     for (int i = 0; i < numClasificadores; i++) {
-                        System.out.println("Evento " + e.getId() + " es SEGURO -> clasificación");
+                        System.out.println("Administrador recibió FIN -> notificando clasificadores");
                         Evento finEvento = new Evento("Fin", 0, true);
                         Clasificacion.generarEvento(finEvento);
-                        System.out.println("Administrador recibió FIN -> notificando clasificadores");
                     }
                     return;
-                } else{
-                    System.out.println("Evento " + e.getId() + " es MALICIOSO -> descartado");
-                }
+                } 
+                
                 int numRandom = random.nextInt(21);
                 if (numRandom % 4 == 0){
+                        System.out.println("Evento " + e.getId() + " es SEGURO -> clasificación");
                         Clasificacion.generarEvento(e);
-                    }
+                }else{
+                    System.out.println("Evento " + e.getId() + " es MALICIOSO -> descartado");
+                }
+                    
                 }
                 
             }

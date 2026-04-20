@@ -1,0 +1,6 @@
+numSensores=2
+numBase_eventos=2
+numClasificadores=2
+numServidores=2
+capacidadB_clasificacion=3
+capacidadB_consolidacion=3

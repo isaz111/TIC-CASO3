@@ -42,7 +42,7 @@ public class Broker extends Thread {
                     monitor.generarEvento(evento);
                 }
             }
-
+        System.out.println("Broker terminó de procesar todos los eventos -> envía FIN al administrador");
         Evento finEvento = new Evento( "Fin",0 , true);
         buzonAlertas.put(finEvento);
 

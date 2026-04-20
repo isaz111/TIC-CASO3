@@ -87,7 +87,7 @@ public class Main {
             servidores[i].join();
         }
 
-        System.out.println("✅ Sistema finalizó correctamente");
+        System.out.println("El sistema finalizó correctamente");
 
 
 

@@ -11,13 +11,14 @@ public class ControlClasificadores {
 
     public synchronized void registrarFin() throws InterruptedException {
         terminados++;
-        
+        System.out.println("Clasificador terminó. Total: " + terminados);
+
         if (terminados == numClasificadores) {
+            System.out.println("Todos los clasificadores terminaron -> enviando FIN a servidores");
             for (int i = 0; i < numServidores; i++) {
                 Evento finEvento = new Evento("Fin", 0, true);
                 consolidacion[i].generarEvento(finEvento);
             }
-            System.out.println("Clasificador terminó. Total: " + terminados);
         }
     }
 
