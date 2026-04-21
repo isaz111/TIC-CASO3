@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Sensores implements Runnable {
+public class Sensores extends Thread {
     private int idSensor;
     private int numBase_eventos;
     private int ns;

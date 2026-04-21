@@ -45,10 +45,9 @@ public class Main {
 
         Broker broker = new Broker(buzonEntrada, buzonAlerta, monitorClasificacion, numB_Sensores, numBase_eventos);
 
-        Thread[] sensores = new Thread[numB_Sensores];
+        Sensores[] sensores = new Sensores[numB_Sensores];
         for (int i = 0; i < numB_Sensores; i++) {
-            Sensores sensor = new Sensores(numBase_eventos, i + 1, numServidores, buzonEntrada);
-            sensores[i] = new Thread(sensor);
+            sensores[i]  = new Sensores(numBase_eventos, i + 1, numServidores, buzonEntrada);
         }
 
         //inicia servidores
@@ -69,7 +68,7 @@ public class Main {
         }
 
         //finaliza sensores
-        for (Thread sensor : sensores) {
+        for (Sensores sensor : sensores) {
             sensor.join();
         }
 
